@@ -74,7 +74,8 @@ python manage.py runserver
 - **Eliminar** servidores.
 
 ## Captura de pantalla
-*(Agrega una captura de pantalla de la aplicación aquí)*
+![image](https://github.com/user-attachments/assets/71db9031-1161-46dc-ad46-20c9d847eb88)
+
 
 ## Licencia
 Este proyecto está bajo la licencia MIT. Puedes usarlo y modificarlo libremente.
