@@ -23,6 +23,7 @@ def register(request):
         try:
             encrypted_password = make_password(password)
             new_user = User.objects.create(username=username, email=email, password=encrypted_password)
+            new_user.save()
             messages.success(request, 'Usuario registrado con éxito.')
             return redirect('login')
         except Exception as e:
