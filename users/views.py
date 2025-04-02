@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 from .models import Server
 from django.contrib import messages 
 from django.contrib.auth.hashers import check_password, make_password
@@ -49,6 +50,11 @@ def login(request):
             return redirect('register')
     
     return render(request, 'login.html')
+
+def user_logout(request):
+    logout(request)
+    messages.success(request, "Sesión cerrada exitosamente.")
+    return redirect('login')
 
 def home(request):
     user_name = request.session.get('user_name')
