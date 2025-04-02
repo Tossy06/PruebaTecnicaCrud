@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/register.css' %}">
     <title>Document</title>
 </head>
 <body>
@@ -31,8 +32,8 @@
               name="password"
               required
             />
-            <input type="checkbox" class="check-box" name="terms" required />
-            <span>Acepto los términos y condiciones</span>
+            
+            <span><input type="checkbox" class="check-box" name="terms" required />Acepto los términos y condiciones</span>
             <button type="submit" class="submit-btn">Register</button>
         </form>
     </div>

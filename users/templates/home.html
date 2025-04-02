@@ -1,11 +1,104 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <title>Gestión de Servidores</title>
 </head>
 <body>
-    <h1>Holaa {{user_name}}</h1>
+    <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+        <div class="card p-4 shadow-lg text-center mb-4">
+            <h1>Holaa, {{ user_name }} 👋</h1>
+        </div>
+
+        <!-- Formulario para agregar servidores -->
+        <div class="card p-4 shadow-lg mb-4">
+            <h3>Agregar Nuevo Servidor</h3>
+            <form method="POST" action="{% url 'server_create' %}" class="row g-3">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <input type="text" name="name" class="form-control" placeholder="Nombre del Servidor" required>
+                </div>
+                <div class="col-md-6">
+                    <select name="operating_system" class="form-control">
+                        <option value="Windows Server">Windows Server</option>
+                        <option value="Ubuntu">Ubuntu</option>
+                        <option value="CentOS">CentOS</option>
+                        <option value="Debian">Debian</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="ram" class="form-control" placeholder="RAM (GB)" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="storage" class="form-control" placeholder="Disco (GB)" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="ip_address" class="form-control" placeholder="Dirección IP" required>
+                </div>
+                <div class="col-md-6">
+                    <select name="status" class="form-control">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                        <option value="Mantenimiento">Mantenimiento</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary w-100">Guardar Servidor</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Lista de servidores -->
+        <div class="card p-4 shadow-lg w-100">
+            <h3>Lista de Servidores</h3>
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Sistema Operativo</th>
+                        <th>RAM</th>
+                        <th>Disco</th>
+                        <th>IP</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for server in servers %}
+                    <tr>
+                        <td>{{ server.name }}</td>
+                        <td>{{ server.operating_system }}</td>
+                        <td>{{ server.ram }} GB</td>
+                        <td>{{ server.storage }} GB</td>
+                        <td>{{ server.ip_address }}</td>
+                        <td>
+                            <span class="badge 
+                                {% if server.status == 'Activo' %} bg-success 
+                                {% elif server.status == 'Inactivo' %} bg-secondary 
+                                {% else %} bg-warning {% endif %}">
+                                {{ server.status }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{% url 'server_change_status' server.id 'Activo' %}" class="btn btn-sm btn-success">Activar</a>
+                            <a href="{% url 'server_change_status' server.id 'Inactivo' %}" class="btn btn-sm btn-secondary">Desactivar</a>
+                            <a href="{% url 'server_change_status' server.id 'Mantenimiento' %}" class="btn btn-sm btn-warning">Mantenimiento</a>
+                            <a href="{% url 'server_delete' server.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center">No hay servidores registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

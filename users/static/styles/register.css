@@ -16,7 +16,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     width: 100%;
-    max-width: 200px;
+    max-width: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,6 +58,11 @@ body {
 
 .submit-btn:hover {
     background: #ff5a92;
+}
+
+span {
+    color: #fff;
+    font-size: 14px;
 }
 a {
     display: block;
