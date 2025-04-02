@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+    <title>login</title>
+</head>
+<body>
+    <div class="content">
+        <form id="login" class="input-group" action="" method="POST">
+            {% csrf_token %}
+            <input
+              type="text"
+              class="input-field"
+              placeholder=" Username "
+              name = 'user_name'
+              required
+            />
+            <input
+              type="password"
+              class="input-field"
+              placeholder=" User Password "
+              name = 'password'
+              required
+            />
+            
+              <input type="checkbox" class="check-box" /><span
+              >Remember Password</span
+            >
+            <button type="submit" class="submit-btn">Log in</button>
+            <a href="{url 'register'}">Registrarse</a>
+          </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content">
+        <form id="Register" class="input-group" method="POST" action="">
+            {% csrf_token %}
+            <input
+              type="text"
+              class="input-field"
+              placeholder="Username"
+              name="user_name"
+              required
+            />
+            <input
+              type="email"
+              class="input-field"
+              placeholder="Email"
+              name="email"
+              required
+            />
+            <input
+              type="password"
+              class="input-field"
+              placeholder="Password"
+              name="password"
+              required
+            />
+            <input type="checkbox" class="check-box" name="terms" required />
+            <span>Acepto los términos y condiciones</span>
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+    </div>
+</body>
+</html>
